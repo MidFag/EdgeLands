@@ -36,6 +36,10 @@ public class WeaponLegendaryChaos extends Weapon {
 			//gennable=false;
 			
 			spr.setTexture(new Texture(Gdx.files.internal("icon_legendary_chaos_shotgun.png")));
+			spr.setSize(75, 40);
+			
+			model.setTexture(new Texture(Gdx.files.internal("model_shotgun_chaos.png")));
+			model.setSize(200, 90);
 			
 			Attribute_list.add(new WeaponAttributeChaos());
 			

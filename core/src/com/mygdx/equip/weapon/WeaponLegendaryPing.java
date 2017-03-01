@@ -24,7 +24,7 @@ public class WeaponLegendaryPing extends Weapon {
 			base_dispersion=8;
 			base_dispersion_additional=3;
 			base_ammo_size=120;
-			base_reload_time=10;
+			base_reload_time=10/10;
 			
 			need_warm=7;
 			

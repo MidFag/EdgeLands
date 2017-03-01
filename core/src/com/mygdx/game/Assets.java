@@ -67,7 +67,7 @@ public class Assets {
 			else
 			{tile[i]=new Texture(Gdx.files.internal("tile/tile"+i+".png"));}
 			
-			tile[i].setFilter(TextureFilter.Linear, TextureFilter.Nearest); 
+			tile[i].setFilter(TextureFilter.Linear, TextureFilter.Linear); 
 		}
 		
 		skill_wheel.setTexture(new Texture(Gdx.files.internal("eye.png")));

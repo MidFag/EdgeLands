@@ -30,7 +30,7 @@ public class MissileExplosion extends Missile {
 	}
 	
 	
-	public void sub_update(float _d)
+	public void preupdate(float _d)
 	{
 		spr.setOrigin(spr.getScaleX()/2f, spr.getScaleY()/2f);
 		

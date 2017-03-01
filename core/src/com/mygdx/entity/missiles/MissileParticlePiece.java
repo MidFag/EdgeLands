@@ -30,7 +30,7 @@ public class MissileParticlePiece extends Missile {
 	}
 	
 	
-	public void sub_update(float _d)
+	public void preupdate(float _d)
 	{
 		speed*=Math.pow(0.5f, _d);
 		speed-=_d;

@@ -34,7 +34,9 @@ import com.mygdx.game.GUI.Button;
 
 
 public class GScreen implements Screen {
-    final Main game;
+    private static final int enemy_gen_count = 100;
+
+	final Main game;
     
     public static float[][] cels=new float[200][200];
     public static float[][] path=new float[300][300];
@@ -310,7 +312,7 @@ public class GScreen implements Screen {
        // pl.spr.setSize(51,21);
         pl.spr.getTexture().setFilter(TextureFilter.Linear, TextureFilter.Nearest); 
 
-        for (int i=0; i<500; i++)
+        for (int i=0; i<enemy_gen_count; i++)
         {
         	if (Math.random()>0.75f)
         	add_entity(new EntityVizjun(new Vector2(350+rnd(3000),300+rnd(3000)),false));

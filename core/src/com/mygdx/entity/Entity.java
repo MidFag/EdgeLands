@@ -415,17 +415,20 @@ public class Entity {
 	public void update(float _d)
 	{
 		some_update(_d);
-		/*
-		for (int i=0; i<=armored_shield.Attribute_list.size()-1; i++)
-		{
-			armored_shield.Attribute_list.get(i).update(_d, this);
-		}
 		
-		if (armored_weapon!=null)
-		for (int i=0; i<=armored_weapon.Attribute_list.size()-1; i++)
+		for (int j=0; j<2; j++)
 		{
-			armored_weapon.Attribute_list.get(i).update(_d, this,armored_weapon);
-		}*/
+			for (int i=0; i<=armored_shield.Attribute_list.size()-1; i++)
+			{
+				armored_shield.Attribute_list.get(i).update(_d, this);
+			}
+			
+			if (armored[j]!=null)
+			for (int i=0; i<=armored[j].Attribute_list.size()-1; i++)
+			{
+				armored[j].Attribute_list.get(i).update(_d, this,armored[j]);
+			}
+		}
 		
 		
 		

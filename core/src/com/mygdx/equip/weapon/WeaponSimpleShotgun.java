@@ -31,6 +31,10 @@ public class WeaponSimpleShotgun extends Weapon {
 			name="Стандартный дробовик";
 			
 			spr.setTexture(new Texture(Gdx.files.internal("icon_shotgun.png")));
+			spr.setSize(75, 40);
+			
+			model.setTexture(new Texture(Gdx.files.internal("model_shotgun.png")));
+			model.setSize(200, 90);
 		}
 		
 

@@ -71,6 +71,8 @@ public class Missile {
 	
 	public void update(float _d)
 	{
+		preupdate(_d);
+		
 		px=pos.x;
 		py=pos.y;
 		pos.add(sx*speed*_d,sy*speed*_d);
@@ -81,11 +83,11 @@ public class Missile {
 		*/
 		lifetime-=_d;
 		
-		sub_update(_d);
+		
 
 	}
 	
-	public void sub_update(float _d)
+	public void preupdate(float _d)
 	{
 		
 	}
@@ -154,8 +156,13 @@ public class Missile {
 		gs.Missile_list.remove(this);
 	}
 	
-	public Shd get_shd(Vector2 _s, Vector2 _e)
+
+	public Shd get_shd(Vector2 _s,Vector2 _e)
 	{
-		return new ShdLaser(_s, _e);
+			Shd s=new ShdSmoke(_s,_e);
+			s.lifetime=0.35f;
+			
+			return s;
+		
 	}
 }
