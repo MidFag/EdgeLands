@@ -5,12 +5,14 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.entity.Entity;
 import com.mygdx.entity.missiles.Missile;
 import com.mygdx.entity.missiles.MissileSimple;
+import com.mygdx.equip.energoshield.EnergoshieldSimple;
 import com.mygdx.equip.weapon.attr.WeaponAttribute;
 import com.mygdx.equip.weapon.attr.WeaponAttributeAccuracy;
 import com.mygdx.equip.weapon.attr.WeaponAttributeAttackSpeed;
@@ -18,6 +20,7 @@ import com.mygdx.equip.weapon.attr.WeaponAttributeClipSize;
 import com.mygdx.equip.weapon.attr.WeaponAttributeDamage;
 import com.mygdx.equip.weapon.attr.WeaponAttributeReloadSpeed;
 import com.mygdx.equip.weapon.attr.WeaponAttributeStability;
+import com.mygdx.game.Enums.Rarity;
 import com.mygdx.game.GScreen;
 
 public class Weapon {
@@ -67,6 +70,8 @@ public class Weapon {
 	
 	public List<WeaponAttribute> Attribute_list = new ArrayList<WeaponAttribute>();
 	
+	public Rarity rarity;
+	
 	
 	
 		public Weapon()
@@ -83,7 +88,16 @@ public class Weapon {
 			//update_stats();
 			//generate();
 			//update_attributes_bonus();
+			/*
+			if (rarity.ordinal()==0){spr.setColor(Color.WHITE);}
+			if (rarity.ordinal()==1){spr.setColor(Color.GREEN);}
+			if (rarity.ordinal()==2){spr.setColor(Color.CYAN);}
+			if (rarity.ordinal()==3){spr.setColor(Color.MAGENTA);}
+			if (rarity.ordinal()==4){spr.setColor(Color.ORANGE);}*/
 			
+			rarity=Rarity.COMMON;
+			
+			System.out.println("Parent class");
 		
 		}
 		
@@ -111,6 +125,13 @@ public class Weapon {
 			//System.out.println("damage^ "+total_damage);
 			//System.out.println("damage^ "+total_damage);
 			
+			
+			if (rarity==Rarity.COMMON){spr.setColor(Color.WHITE);}
+			if (rarity==Rarity.UNCOMMON){spr.setColor(Color.GREEN);}
+			if (rarity==Rarity.RARE){spr.setColor(Color.ROYAL);}
+			if (rarity==Rarity.ELITE){spr.setColor(Color.MAGENTA);}
+			if (rarity==Rarity.LEGENDARY){spr.setColor(Color.ORANGE);}
+			
 		}
 		
 		public Missile get_missile(Entity pl)
@@ -118,7 +139,7 @@ public class Weapon {
 			return new MissileSimple(
 					new Vector2(pl.pos.x,pl.pos.y),
 					(float) Math.toRadians(360-pl.spr.getRotation()+get_dispersion()+GScreen.rnd(add_disp)-add_disp/2),
-					(GScreen.rnd(200)+600.0f),
+					(GScreen.rnd(250)+1000.0f),
 					pl.is_AI);
 		}
 		
@@ -135,9 +156,29 @@ public class Weapon {
 		public void generate()
 		{
 			total_damage=base_damage*level;
-					
+				
+			int r=0;
 			
-			attr_point=level*10;
+			if (rarity.ordinal()==0)
+			{
+				for (int i=0; i<5; i++)
+				{
+					r=i;
+					
+					if (Math.random()>0.4f){break;}
+				}
+				
+				if (r==0) {rarity=Rarity.COMMON;}
+				if (r==1) {rarity=Rarity.UNCOMMON;}
+				if (r==2) {rarity=Rarity.RARE;}
+				if (r==3) {rarity=Rarity.ELITE;}
+				if (r==4) {rarity=Rarity.LEGENDARY;}
+			}
+			
+			
+			
+			
+			attr_point=level*10*(1+rarity.ordinal()/5f);
 			
 			
 			

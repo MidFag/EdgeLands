@@ -37,7 +37,7 @@ public class MissilePing extends Missile {
 		
 			if (wait_time<=0)
 			{
-				speed=200+(int)(Math.random()*50);
+				speed=600+(int)(Math.random()*150);
 			}
 		}
 	}

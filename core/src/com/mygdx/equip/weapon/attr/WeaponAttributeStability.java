@@ -6,7 +6,7 @@ public class WeaponAttributeStability extends WeaponAttribute {
 
 	public WeaponAttributeStability()
 	{
-		max_level=20;
+		max_level=100;
 		cost=1;
 		
 		name="stability";

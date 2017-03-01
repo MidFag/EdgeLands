@@ -310,7 +310,7 @@ public class GScreen implements Screen {
        // pl.spr.setSize(51,21);
         pl.spr.getTexture().setFilter(TextureFilter.Linear, TextureFilter.Nearest); 
 
-        for (int i=0; i<100; i++)
+        for (int i=0; i<500; i++)
         {
         	if (Math.random()>0.75f)
         	add_entity(new EntityVizjun(new Vector2(350+rnd(3000),300+rnd(3000)),false));
@@ -606,7 +606,8 @@ public class GScreen implements Screen {
 	        			else
 	        			{
 	        				Missile_list.get(i).lifetime=10;
-	        				Missile_list.get(i).angle+=Math.toRadians(180);
+	        				Missile_list.get(i).angle+=Math.toRadians(180+(Math.random()*10-5));
+	        				
 	        				
 	        				Missile_list.get(i).update_vectors_state();
 	        				

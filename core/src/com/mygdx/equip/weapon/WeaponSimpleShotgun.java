@@ -46,7 +46,7 @@ public class WeaponSimpleShotgun extends Weapon {
 			return new MissileSimple(
 					new Vector2(pl.pos.x,pl.pos.y),
 					(float) Math.toRadians(360-pl.spr.getRotation()+get_dispersion()+GScreen.rnd(add_disp)-add_disp/2),
-					(GScreen.rnd(100)+500.0f),
+					(GScreen.rnd(100)+800.0f),
 					pl.is_AI);
 		}
 		

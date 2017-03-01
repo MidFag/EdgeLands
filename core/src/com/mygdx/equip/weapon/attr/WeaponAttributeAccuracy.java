@@ -6,7 +6,7 @@ public class WeaponAttributeAccuracy extends WeaponAttribute {
 
 	public WeaponAttributeAccuracy()
 	{
-		max_level=20;
+		max_level=100;
 		cost=1;
 		
 		name="accuracy";

@@ -8,6 +8,7 @@ import com.mygdx.entity.Entity;
 import com.mygdx.entity.missiles.Missile;
 import com.mygdx.entity.missiles.MissilePing;
 import com.mygdx.game.Assets;
+import com.mygdx.game.Enums.Rarity;
 import com.mygdx.game.GScreen;
 
 public class WeaponLegendaryPing extends Weapon {
@@ -16,6 +17,7 @@ public class WeaponLegendaryPing extends Weapon {
 	
 		public WeaponLegendaryPing()
 		{
+			super ();
 			base_damage=10;
 			base_missile_count=1;
 			base_shoot_cooldown=0.03f;
@@ -26,12 +28,22 @@ public class WeaponLegendaryPing extends Weapon {
 			
 			need_warm=7;
 			
+			rarity=Rarity.LEGENDARY;
+			
 			generate();
 			update_attributes_bonus();
 			
 			name="-Ping 454.739.223.565";
 			
 			spr.setTexture(new Texture(Gdx.files.internal("icon_legendary_ping_minigun.png")));
+			spr.setSize(75, 40);
+			
+			model.setTexture(new Texture(Gdx.files.internal("model_minigun_ping.png")));
+			model.setSize(200, 90);
+			
+			
+			
+			System.out.println("Child class");
 		}
 		
 
