@@ -50,6 +50,8 @@ public class Assets {
 
 	public static Texture missile;
 	
+	public static Texture rect=new Texture(Gdx.files.internal("rect.png"));
+	
 	
 	public Assets()
 	{
@@ -106,7 +108,7 @@ public class Assets {
 
 		
 		music.setLooping(true);
-		music.setVolume(0.1f);
+		music.setVolume(0.05f);
 		music.play();
 		
 	}

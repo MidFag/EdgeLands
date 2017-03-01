@@ -25,7 +25,12 @@ public class WeaponSimpleMinigun extends Weapon {
 			update_attributes_bonus();
 			
 			name="Стандартный пулемет";
+			
 			spr.setTexture(new Texture(Gdx.files.internal("icon_minigun.png")));
+			spr.setSize(75, 40);
+			
+			model.setTexture(new Texture(Gdx.files.internal("model_minigun.png")));
+			model.setSize(200, 90);
 		}
 		
 

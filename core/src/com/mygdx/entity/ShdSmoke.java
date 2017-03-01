@@ -22,7 +22,7 @@ public class ShdSmoke extends Shd {
 	@Override
 	public void draw()
 	{
-		Main.shapeRenderer.setColor(0.2f,0.18f,0.16f,lifetime/23);
+		Main.shapeRenderer.setColor(0.2f,0.18f,0.16f,lifetime/10);
 		for (int i=0; i<3; i++)
 		{Main.shapeRenderer.rectLine(start, end, 3-i);}
 	}

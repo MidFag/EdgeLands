@@ -53,6 +53,7 @@ public class Weapon {
 	public float reload_timer;
 	
 	public Sprite spr=new Sprite(new Texture(Gdx.files.internal("icon_firle.png")));
+	public Sprite model=new Sprite(new Texture(Gdx.files.internal("icon_firle.png")));
 	
 	public String name;
 	

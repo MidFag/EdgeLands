@@ -45,7 +45,7 @@ public class EntityPlayer extends Entity {
 		
 		//is_player
 		
-		speed=200;
+		speed=500;
 
 		have_ability=true;
 		

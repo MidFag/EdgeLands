@@ -2,6 +2,7 @@ package com.mygdx.game.GUI;
 
 import com.mygdx.equip.energoshield.Energoshield;
 import com.mygdx.equip.weapon.Weapon;
+import com.mygdx.game.Assets;
 import com.mygdx.game.GScreen;
 import com.mygdx.game.InputHandler;
 import com.mygdx.game.Main;
@@ -95,34 +96,49 @@ public class ButtonEqWeapon extends Button {
 			//float tx=150;
 			
 			//float ty=700-250;
-		
+			/*Main.shapeRenderer_static.setColor(0.1f, 0.12f, 0.15f,0.5f);
+			Main.shapeRenderer_static.rect(info_x-10, info_y-10-200, 300, 220);*/
+			
 			Main.font.setColor(1.0f, 1.0f, 1.0f, 1);
+			Main.batch_static.draw(Assets.rect, info_x-10, info_y-10-230);
+			
 			
 			if (obj instanceof Weapon)
 			{
 				
 				Weapon w=((Weapon)obj);
 				draw_info(""+((Weapon)obj).get_name(),"");
+				//mov+=25;
+				//draw_info("Bonuses: ",""+((Weapon)obj).attr_count);
 				mov+=25;
-				draw_info("Bonuses: ",""+((Weapon)obj).attr_count);
-				mov+=25;
-				color_it (w.total_damage,w.base_damage); draw_info("Damage: ",""+w.total_damage+" base "+w.base_damage);
+				color_it (w.total_damage,w.base_damage); draw_info("Урон: ",""+w.total_damage);
 				mov+=5;
-				color_it (w.total_shoot_cooldown,w.base_shoot_cooldown); draw_info("Attack speed: ",""+Math.round(1.0f/w.total_shoot_cooldown*10.0f)/10.0f);
+				color_it (w.total_shoot_cooldown,w.base_shoot_cooldown); draw_info("Скорострельность: ",""+Math.round(1.0f/w.total_shoot_cooldown*10.0f)/10.0f);
 				color_it (w.total_dispersion,w.base_dispersion);draw_info("Dispersion: ",""+Math.round(w.total_dispersion));
 				color_it (w.total_dispersion_additional,w.base_dispersion_additional);draw_info("Dispersion add: ",""+Math.round(w.total_dispersion_additional));
 				color_it (w.total_ammo_size,w.base_ammo_size);draw_info("Ammo size: ",""+Math.round(w.total_ammo_size));
 				color_it (w.total_reload_time,w.base_reload_time);draw_info("Reload time: ",""+Math.round(w.total_reload_time));
 				
+				
+				
+				((Weapon)obj).model.setPosition(info_x,info_y-300);
+				((Weapon)obj).model.draw(Main.batch_static);
+				//model.
+				
 
 			}
 			
+				
 			if (obj instanceof Energoshield)
 			{
+
+				
 				Energoshield e=((Energoshield)obj);
 				draw_info(""+((Energoshield)obj).name,"");
 				
-				draw_info("Bonuses: ",""+((Energoshield)obj).attr_count);
+				mov+=15;
+				
+				//draw_info("Bonuses: ",""+((Energoshield)obj).attr_count);
 				
 				
 				color_it (e.total_value,e.base_value); draw_info("Value: ",""+((Energoshield)obj).total_value);
@@ -202,12 +218,16 @@ public class ButtonEqWeapon extends Button {
 			{
 				((Energoshield)obj).spr.setPosition(pos.x-spr.getWidth()/2,pos.y-spr.getHeight()/2);
 				((Energoshield)obj).spr.draw(Main.batch_static);
+				
+				
 			}
 			
 			if (obj instanceof Weapon)
 			{
 				((Weapon)obj).spr.setPosition(pos.x-spr.getWidth()/2,pos.y-spr.getHeight()/2);
 				((Weapon)obj).spr.draw(Main.batch_static);
+				
+
 			}
 		}
 		
@@ -219,8 +239,10 @@ public class ButtonEqWeapon extends Button {
 	public void draw_info(String _s1, String _s2)
 	{
 		Main.font.draw(Main.batch_static, _s1, info_x, info_y-mov);
-		Main.font.draw(Main.batch_static, _s2, info_x+100, info_y-mov);
-		mov+=25;
+		
+		if (!_s2.equals(""))
+		{Main.font.draw(Main.batch_static, "- "+_s2+" -", info_x+150, info_y-mov);}
+		mov+=20;
 	}
 	
 }

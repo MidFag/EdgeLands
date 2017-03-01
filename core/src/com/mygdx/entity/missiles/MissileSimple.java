@@ -34,7 +34,7 @@ public class MissileSimple extends Missile {
 	public Shd get_shd(Vector2 _s,Vector2 _e)
 	{
 		Shd s=new ShdSmoke(_s,_e);
-		s.lifetime=1;
+		s.lifetime=0.35f;
 		
 		return s;
 	}

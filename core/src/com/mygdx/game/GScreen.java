@@ -667,42 +667,47 @@ public class GScreen implements Screen {
 	            fy=(int)(e.pos.y/15);
 	            
 	            
+	        	if ((fx>0)&&(fy>0)&&(fx<299)&&(fy<299))
+	        	{
+	        		if ((path[fx][fy+1]<path[fx][fy-1]-0)&&(path[fx][fy+1]>=5)&&(path[fx][fy+1]<900))
 	        	
-	        	if ((path[fx][fy+1]<path[fx][fy-1]-0)&&(path[fx][fy+1]>=5)&&(path[fx][fy+1]<900))
-	        	{e.add_impulse(0, e.speed,delta);}
-	        	
-	        	if ((path[fx][fy-1]<path[fx][fy+1]-0)&&(path[fx][fy-1]>=5)&&(path[fx][fy-1]<900))
-	        	{e.add_impulse(0, -e.speed,delta);}
-	        	
-	        	if ((path[fx+1][fy]<path[fx-1][fy]-0)&&(path[fx+1][fy]>=5)&&(path[fx+1][fy]<900))
-	        	{e.add_impulse(e.speed, 0,delta);}
-	        	
-	        	if ((path[fx-1][fy]<path[fx+1][fy]-0)&&(path[fx-1][fy]>=5)&&(path[fx-1][fy]<900))
-	        	{e.add_impulse(-e.speed, 0,delta);}
-	        	
-	        	
-	        	
-	        	if ((path[fx][fy+1]<path[fx][fy-1]-0)&&(path[fx][fy+1]<5)&&(path[fx][fy+1]<130))
-	        	{e.add_impulse(0, -e.speed,delta);}
-	        	
-	        	if ((path[fx][fy-1]<path[fx][fy+1]-0)&&(path[fx][fy-1]<5)&&(path[fx][fy-1]<130))
-	        	{e.add_impulse(0, e.speed,delta);}
-	        	
-	        	if ((path[fx+1][fy]<path[fx-1][fy]-0)&&(path[fx+1][fy]<5)&&(path[fx+1][fy]<130))
-	        	{e.add_impulse(-e.speed, 0,delta);}
-	        	
-	        	if ((path[fx-1][fy]<path[fx+1][fy]-0)&&(path[fx-1][fy]<5)&&(path[fx-1][fy]<130))
-	        	{e.add_impulse(e.speed, 0,delta);}
+		        	{e.add_impulse(0, e.speed,delta);}
+		        	
+		        	if ((path[fx][fy-1]<path[fx][fy+1]-0)&&(path[fx][fy-1]>=5)&&(path[fx][fy-1]<900))
+		        	{e.add_impulse(0, -e.speed,delta);}
+		        	
+		        	if ((path[fx+1][fy]<path[fx-1][fy]-0)&&(path[fx+1][fy]>=5)&&(path[fx+1][fy]<900))
+		        	{e.add_impulse(e.speed, 0,delta);}
+		        	
+		        	if ((path[fx-1][fy]<path[fx+1][fy]-0)&&(path[fx-1][fy]>=5)&&(path[fx-1][fy]<900))
+		        	{e.add_impulse(-e.speed, 0,delta);}
+		        	
+		        	
+		        	
+		        	if ((path[fx][fy+1]<path[fx][fy-1]-0)&&(path[fx][fy+1]<5)&&(path[fx][fy+1]<130))
+		        	{e.add_impulse(0, -e.speed,delta);}
+		        	
+		        	if ((path[fx][fy-1]<path[fx][fy+1]-0)&&(path[fx][fy-1]<5)&&(path[fx][fy-1]<130))
+		        	{e.add_impulse(0, e.speed,delta);}
+		        	
+		        	if ((path[fx+1][fy]<path[fx-1][fy]-0)&&(path[fx+1][fy]<5)&&(path[fx+1][fy]<130))
+		        	{e.add_impulse(-e.speed, 0,delta);}
+		        	
+		        	if ((path[fx-1][fy]<path[fx+1][fy]-0)&&(path[fx-1][fy]<5)&&(path[fx-1][fy]<130))
+		        	{e.add_impulse(e.speed, 0,delta);}
+		        	
+		        	if (path[(int)(e.pos.x/15)][(int)(e.pos.y/15)]<100)
+		        	{path[(int)(e.pos.x/15)][(int)(e.pos.y/15)]=700+path[(int)(e.pos.x/15)][(int)(e.pos.y/15)]*0;}
+    			
+		        	path_time[(int)(e.pos.x/15)][(int)(e.pos.y/15)]=TimeUtils.millis();
+	        	}
         	}
  
         	e.draw();
         	e.update(delta);
         	
     		
-    			if (path[(int)(e.pos.x/15)][(int)(e.pos.y/15)]<100)
-    			{path[(int)(e.pos.x/15)][(int)(e.pos.y/15)]=700+path[(int)(e.pos.x/15)][(int)(e.pos.y/15)]*0;}
     			
-    			path_time[(int)(e.pos.x/15)][(int)(e.pos.y/15)]=TimeUtils.millis();
     		
         }
       
@@ -771,6 +776,7 @@ public class GScreen implements Screen {
 		}
 		
 		game.batch_static.begin();
+		//game.shapeRenderer_static.begin(ShapeType.Filled);
 			Main.font.draw(Main.batch_static, "FPS: "+Math.round(1.0f/delta), 17, 30);
 			Main.font.draw(Main.batch_static, "Shield : "+pl.armored_shield.warm, 17, 60);
 			
@@ -799,6 +805,7 @@ public class GScreen implements Screen {
 				{Button_list.remove(i); i--;}
 			}
 			
+		//game.shapeRenderer_static.end();
 		game.batch_static.end();
 		
 		game.shapeRenderer.begin(ShapeType.Line);

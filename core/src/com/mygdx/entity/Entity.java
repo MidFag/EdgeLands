@@ -154,9 +154,9 @@ public class Entity {
 		if (hurt_sound_cooldown<=0)
 		{
 			if (is_AI)
-			{Assets.metal_sound.play(0.15f, (float) (Math.random()*0.2f+1.9f), 0);}
+			{Assets.metal_sound.play(0.05f, (float) (Math.random()*0.2f+1.9f), 0);}
 			else
-			{Assets.plastic.play(0.85f, (float) (Math.random()*0.1f+0.55f), 0);}
+			{Assets.plastic.play(0.25f, (float) (Math.random()*0.1f+0.55f), 0);}
 			
 			hurt_sound_cooldown=0.25f;
 		}
@@ -252,7 +252,7 @@ public class Entity {
 		//}
 		
 		//m
-		Assets.metal_destroy.play(0.5f, (float) (Math.random()*0.1f+0.95f), 0);
+		Assets.metal_destroy.play(0.25f, (float) (Math.random()*0.1f+0.95f), 0);
 
 	}
 	
@@ -386,7 +386,7 @@ public class Entity {
 			armored[_i].add_disp+=armored[_i].total_dispersion_additional;
 			
 			if ((pos.dst(GScreen.pl.pos)<300)&&(armored[_i]!=null))
-			{armored[_i].get_shoot_sound().play((1f-pos.dst(GScreen.pl.pos)/300.0f)*0.25f);}
+			{armored[_i].get_shoot_sound().play((1f-pos.dst(GScreen.pl.pos)/300.0f)*0.15f);}
 			
 			armored[_i].ammo--;
 			if (armored[_i].ammo<=0)
@@ -431,6 +431,7 @@ public class Entity {
 		
 		for (int i=0; i<2; i++)
 		{
+			if (armored[i]!=null)
 			if (miso>0)
 			{Assets.minigun.setPitch(miso, armored[i].warm/armored[i].need_warm);}
 			
@@ -483,7 +484,7 @@ public class Entity {
 		
 		
 		move (impulse.x,impulse.y,_d);
-		impulse.scl((float) Math.pow(0.10f, _d));
+		impulse.scl((float) Math.pow(0.02f, _d));
 		
 		if (is_AI)
 		{
@@ -555,8 +556,9 @@ public class Entity {
 			{
 				for (int i=0; i<2; i++)
 				{
-					armored[i].warm-=_d;
-					if (armored[i].warm<0){armored[i].warm=0;}
+					if (armored[i]!=null)
+					{armored[i].warm-=_d;
+					if (armored[i].warm<0){armored[i].warm=0;}}
 				}
 			}
 		}

@@ -116,17 +116,17 @@ public class InputHandler implements InputProcessor {
     			
     			GScreen.main_control=false;
     			GScreen.Button_list.add(new ButtonEqWeapon(150,250,-1));
-    			GScreen.Button_list.add(new ButtonEqWeapon(200,250,-2));
+    			GScreen.Button_list.add(new ButtonEqWeapon(250,250,-2));
     			
-    			GScreen.Button_list.add(new ButtonEqWeapon(300,250,-5));
+    			GScreen.Button_list.add(new ButtonEqWeapon(350,250,-5));
     			
     			
     			//Assets.shoot00.
     			for (int j=0; j<2; j++)
-    			for (int i=0; i<15; i++)
+    			for (int i=0; i<8; i++)
     			{
     				//if (GScreen.pl.inventory[i] instanceof Weapon)
-    				{GScreen.Button_list.add(new ButtonEqWeapon(150+i*45,200-j*45,i+j*15));}
+    				{GScreen.Button_list.add(new ButtonEqWeapon(150+i*85,200-j*45,i+j*8));}
     			}
     			
     			GScreen.Button_list.add(new ButtonEqWeapon(200,250,99));

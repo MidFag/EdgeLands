@@ -97,7 +97,7 @@ public class Button {
 	{	//		0<10						0+40>10
 		
 		
-		if ((pos.x-20<InputHandler.sposx)&&(pos.x+20>InputHandler.sposx)&&(pos.y-20<InputHandler.sposy)&&(pos.y+20>InputHandler.sposy))
+		if ((pos.x-40<InputHandler.sposx)&&(pos.x+40>InputHandler.sposx)&&(pos.y-20<InputHandler.sposy)&&(pos.y+20>InputHandler.sposy))
 		{
 			return true;
 		}
