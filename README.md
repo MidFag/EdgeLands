@@ -1,4 +1,1 @@
-# LibGDX
-# LibGDX
-# LibGDX
-WTF
+LibGDX project prototype
