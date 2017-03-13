@@ -52,6 +52,22 @@ public class Assets {
 	
 	public static Texture rect=new Texture(Gdx.files.internal("rect.png"));
 	
+	public static Texture stone_wall_01=new Texture(Gdx.files.internal("stone_wall_01.png"));
+	public static Texture stone_pilon_01=new Texture(Gdx.files.internal("stone_pilon_01.png"));
+
+	public static Texture stone_wall_02=new Texture(Gdx.files.internal("stone_wall_02.png"));;
+	
+	public static Texture building_wall_out=new Texture(Gdx.files.internal("building_01.png"));;
+	public static Texture building_wall_in=new Texture(Gdx.files.internal("building_02.png"));;
+	
+	public static Texture mech_down=new Texture(Gdx.files.internal("mech01.png"));;
+	public static Texture mech_right=new Texture(Gdx.files.internal("mech02.png"));;
+	public static Texture mech_left=new Texture(Gdx.files.internal("mech03.png"));;
+	
+	public static Texture mech_leg=new Texture(Gdx.files.internal("leg.png"));;
+	public static Texture mech_foot=new Texture(Gdx.files.internal("foot.png"));;
+	
+	public static Texture mech_foot_shadow=new Texture(Gdx.files.internal("foot_shadow.png"));;
 	
 	public Assets()
 	{
@@ -60,7 +76,7 @@ public class Assets {
 	
 	public static void load_assets()
 	{
-		for (int i=0; i<12; i++)
+		for (int i=0; i<=13; i++)
 		{
 			if (i<10)
 			{tile[i]=new Texture(Gdx.files.internal("tile/tile0"+i+".png"));}
@@ -69,6 +85,11 @@ public class Assets {
 			
 			tile[i].setFilter(TextureFilter.Linear, TextureFilter.Linear); 
 		}
+		
+		mech_right.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		mech_down.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		mech_left.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		
 		
 		skill_wheel.setTexture(new Texture(Gdx.files.internal("eye.png")));
 		skill_wheel.setSize(2048, 2048);

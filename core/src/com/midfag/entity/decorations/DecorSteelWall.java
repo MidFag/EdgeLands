@@ -5,19 +5,20 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.midfag.entity.Entity;
 
-public class DecorPilon extends Entity {
+public class DecorSteelWall extends Entity {
 
-	public DecorPilon(Vector2 _v,boolean _custom) {
+	public DecorSteelWall(Vector2 _v,boolean _custom) {
 		
 		super(_v, _custom);
 		
 		is_AI=false;
 		is_player=false;
 		
-		spr.setTexture(new Texture(Gdx.files.internal("decor_pilon.png")));
-		spr.setSize(15, 15);
+		spr.setTexture(new Texture(Gdx.files.internal("decor_steel_wall.png")));
+		spr.setSize(155, 44);
+		spr.setOrigin(155/2, 44/2f);
 		
-		id="pilon";
+		id="steel_wall";
 		
 		
 		//shield=999999;
@@ -27,7 +28,7 @@ public class DecorPilon extends Entity {
 	@Override
 	public Entity put() {
 		// TODO Auto-generated method stub
-		return new DecorPilon(new Vector2(),true);
+		return new DecorSteelWall(new Vector2(),true);
 	}
 
 }

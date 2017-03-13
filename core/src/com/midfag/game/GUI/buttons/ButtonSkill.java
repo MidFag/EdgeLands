@@ -1,4 +1,4 @@
-package com.midfag.game.GUI;
+package com.midfag.game.GUI.buttons;
 
 
 

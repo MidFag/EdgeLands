@@ -29,6 +29,7 @@ public class Phys {
 	public Object parent;
 	
 	public boolean display;
+	public boolean move_block=true;
 	
 	
 	
@@ -62,14 +63,15 @@ public class Phys {
     	 
     	normal=new Vector2(start.x-(start.x-end.x)/2+(float)Math.sin(Math.toRadians(angle))*5,start.y-(start.y-end.y)/2+(float)Math.cos(Math.toRadians(angle))*5);
     	
+    	int ps=GScreen.path_cell;
     	if (_path)
-    	for (float i=0; i<=1; i+=15/len)
+    	for (float i=0; i<=1; i+=ps/len)
     	{
-    		if (( (int)((start.x+(end.x-start.x)*i)/15)>=0 )&&( (int)((start.x+(end.x-start.x)*i)/15)<300 ))
-    		if (( (int)((start.y+(end.y-start.y)*i)/15)>=0 )&&( (int)((start.y+(end.y-start.y)*i)/15)<300 ))
+    		if ((Math.round((start.x+(end.x-start.x)*i)/ps)>=0)&&( Math.round((start.x+(end.x-start.x)*i)/ps)<300 ))
+    		if (( Math.round((start.y+(end.y-start.y)*i)/ps)>=0 )&&( Math.round((start.y+(end.y-start.y)*i)/ps)<300 ))
     		{
     			
-    			GScreen.path[(int)((start.x+(end.x-start.x)*i)/15)][(int)((start.y+(end.y-start.y)*i)/15)]=999;
+    			GScreen.path[Math.round((start.x+(end.x-start.x)*i)/ps)][Math.round((start.y+(end.y-start.y)*i)/ps)]=999;
     		}
     	}
 		
@@ -78,13 +80,14 @@ public class Phys {
 	
 	public void clear_path()
 	{
-    	for (float i=0; i<=1; i+=15/len)
+		int ps=GScreen.path_cell;
+    	for (float i=0; i<=1; i+=ps/len)
     	{
-    		if (( (int)((start.x+(end.x-start.x)*i)/15)>=0 )&&( (int)((start.x+(end.x-start.x)*i)/15)<300 ))
-    		if (( (int)((start.y+(end.y-start.y)*i)/15)>=0 )&&( (int)((start.y+(end.y-start.y)*i)/15)<300 ))
+    		if (( (int)((start.x+(end.x-start.x)*i)/ps)>=0 )&&( (int)((start.x+(end.x-start.x)*i)/ps)<300 ))
+    		if (( (int)((start.y+(end.y-start.y)*i)/ps)>=0 )&&( (int)((start.y+(end.y-start.y)*i)/ps)<300 ))
     		{
     			
-    			GScreen.path[(int)((start.x+(end.x-start.x)*i)/15)][(int)((start.y+(end.y-start.y)*i)/15)]=0;
+    			GScreen.path[(int)((start.x+(end.x-start.x)*i)/ps)][(int)((start.y+(end.y-start.y)*i)/ps)]=0;
     		}
     	}
 	}

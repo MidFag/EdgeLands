@@ -26,11 +26,14 @@ public class Entity {
 	public Sprite spr=new Sprite(new Texture(Gdx.files.internal("eye.png")));
 	
 	public Vector2 pos=new Vector2();
+	public Vector2 offset=new Vector2();
 	
 	public List<Phys> Phys_list_local = new ArrayList<Phys>();
 	public List<Skill> Skills_list = new ArrayList<Skill>();
 
-
+	public boolean move_vert;
+	
+	public int direction;
 	
 	public float stun=0;
 	
@@ -39,8 +42,6 @@ public class Entity {
 	public boolean is_AI=true;
 	
 	public boolean is_player=false;
-	
-
 
 	public float hurt_sound_cooldown;
 	
@@ -68,31 +69,42 @@ public class Entity {
 	
 	public boolean have_ability=false;
 	
-	public String id;
+	public String id="robo";
+	
+	public int order=0;
+	
+	public boolean diagonal=false;
 	
 	public void init()
 	{
-		if (!custom_phys)
-		{
-			
-			int x=(int)(pos.x/300);
-			int y=(int)(pos.y/300);
-			
-
-				Phys p=new Phys(new Vector2(pos.x-32,pos.y),new Vector2(pos.x+32,pos.y),false,this,true);
-				GScreen.cluster[x][y].Phys_list.add(p);
-				Phys_list_local.add(p);
+		
+		
+			if (!custom_phys)
+			{
 				
-				p=new Phys(new Vector2(pos.x,pos.y-32),new Vector2(pos.x,pos.y+32),false,this,true);
-				GScreen.cluster[x][y].Phys_list.add(p);
-				Phys_list_local.add(p);
-			
-		}
-		else
-		{
-			do_custom_phys();
-			//System.out.println("create CUSTOM phys ");
-		}
+				int x=(int)(pos.x/300);
+				int y=(int)(pos.y/300);
+				
+	
+					Phys p=new Phys(new Vector2(pos.x-32f/1,pos.y),new Vector2(pos.x+32f/1,pos.y),false,this,true);
+					if (is_player){p.move_block=false;}
+					GScreen.cluster[x][y].Phys_list.add(p);
+					Phys_list_local.add(p);
+					
+					
+					
+					p=new Phys(new Vector2(pos.x,pos.y-32f/1),new Vector2(pos.x,pos.y+32f/1),false,this,true);
+					if (is_player){p.move_block=false;}
+					GScreen.cluster[x][y].Phys_list.add(p);
+					Phys_list_local.add(p);
+				
+			}
+			else
+			{
+				do_custom_phys();
+				//System.out.println("create CUSTOM phys ");
+			}
+		
 	}
 	
 	public Entity(Vector2 _v,boolean _custom)
@@ -117,7 +129,17 @@ public class Entity {
 		}	
 	}
 	
-	
+	public float iso(float _f)
+	{
+		//if (!diagonal)
+		//{return pos.y;}
+		
+		//if (!diagonal)
+		return (pos.y-pos.x);
+		
+		//return pos.y+pos.x;
+		//return pos.y-pos.x;
+	}
 	
 	
 	
@@ -191,9 +213,11 @@ public class Entity {
 		if (!burrow)
 		{
 		
-				spr.setPosition(pos.x-spr.getWidth()/2,pos.y-spr.getHeight()/2);
-				spr.draw(Main.batch);
-				
+			
+				spr.setPosition(pos.x-spr.getOriginX(),pos.y-spr.getOriginY());
+				GScreen.Draw_list.add(this);
+				//spr.draw(Main.batch);
+				//Main.font.draw(Main.batch, "!"+iso(0), pos.x, pos.y+100);
 				//Main.font.draw(Main.batch, ""+(int)(armored_shield.value), pos.x, pos.y);
 			//Main.batch.end();
 			/*
@@ -244,11 +268,10 @@ public class Entity {
 			
 			GScreen.cluster[(int)(pos.x/300)][(int)(pos.y/300)].Entity_list.remove(this);
 			
-			if (_o!=null)
-			{
-				GScreen.Entity_list.remove(_o.parent);
-				GScreen.cluster[(int)(pos.x/300f)][(int)(pos.y/300f)].Entity_list.remove(_o.parent);
-			}
+			
+				GScreen.Entity_list.remove(this);
+				GScreen.cluster[(int)(pos.x/300f)][(int)(pos.y/300f)].Entity_list.remove(this);
+			
 		//}
 		
 		//m
@@ -525,7 +548,7 @@ public class Entity {
 	    		{
 	    			phys_timer+=0.5f;
 
-			    		po=GScreen.get_contact(pos.x,pos.y,GScreen.pl.pos.x,GScreen.pl.pos.y,rx,ry,pos.dst(GScreen.pl.pos),true,false);
+			    		po=GScreen.get_contact(pos.x,pos.y,GScreen.pl.pos.x,GScreen.pl.pos.y,rx,ry,pos.dst(GScreen.pl.pos),true,false,false);
 			    		
 			    		if ((po!=null)&&(po.parent==null))
 			    		{
@@ -550,7 +573,7 @@ public class Entity {
 		
 		if (is_player)
 		{
-			if ((InputHandler.MB)&&(armored_shield.value>0))
+			if ((InputHandler.MB)&&(armored_shield.value>0)&&(GScreen.main_control))
 			{
 	    		if (armored[0]!=null)
 	    		{shoot(_d,0);}

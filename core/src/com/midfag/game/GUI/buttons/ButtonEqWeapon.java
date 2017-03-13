@@ -1,4 +1,4 @@
-package com.midfag.game.GUI;
+package com.midfag.game.GUI.buttons;
 
 import com.midfag.equip.energoshield.Energoshield;
 import com.midfag.equip.weapon.Weapon;

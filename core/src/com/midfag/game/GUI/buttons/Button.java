@@ -1,4 +1,4 @@
-package com.midfag.game.GUI;
+package com.midfag.game.GUI.buttons;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

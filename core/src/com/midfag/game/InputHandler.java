@@ -4,13 +4,26 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.InputProcessor;
-import com.midfag.game.GUI.Button;
-import com.midfag.game.GUI.ButtonEqWeapon;
-import com.midfag.game.GUI.ButtonLoadMap;
-import com.midfag.game.GUI.ButtonPutter;
-import com.midfag.game.GUI.ButtonSaveMap;
-import com.midfag.game.GUI.ButtonSkill;
+import com.midfag.entity.Entity;
+import com.midfag.entity.decorations.DecorBuilding;
+import com.midfag.entity.decorations.DecorBuildingWall;
+import com.midfag.entity.decorations.DecorStoneWall;
+import com.midfag.entity.decorations.DecorStonePilon;
+import com.midfag.entity.decorations.DecorStoneWall2;
+import com.midfag.entity.enemies.EntityVizjun;
+import com.midfag.game.GUI.GUI;
+import com.midfag.game.GUI.GUIEdit;
+import com.midfag.game.GUI.GUIInventory;
+import com.midfag.game.GUI.GUISkillsWheel;
+import com.midfag.game.GUI.buttons.Button;
+import com.midfag.game.GUI.buttons.ButtonEqWeapon;
+import com.midfag.game.GUI.buttons.ButtonLoadMap;
+import com.midfag.game.GUI.buttons.ButtonPutter;
+import com.midfag.game.GUI.buttons.ButtonPutterTile;
+import com.midfag.game.GUI.buttons.ButtonSaveMap;
+import com.midfag.game.GUI.buttons.ButtonSkill;
 import com.midfag.game.skills.Skill;
 
 
@@ -45,6 +58,7 @@ public class InputHandler implements InputProcessor {
     public static float dy;
     
     public static boolean subskill_pick=false;
+    public static boolean press=false;
     // Ask for a reference to the Bird when InputHandler is created.
     public InputHandler() {
         // myBird now represents the gameWorld's bird.
@@ -65,12 +79,31 @@ public class InputHandler implements InputProcessor {
     	
     	if (key==Keys.Z)
     	{
+    		GScreen.main_control=GScreen.show_edit;
     		GScreen.show_edit=!GScreen.show_edit;
     		
-    		GScreen.Button_list.add(new ButtonPutter(50,50,GScreen.Object_list.get(0)));
+    		
+    		GUIEdit gui=new GUIEdit();
+    		
+    		GScreen.Button_list.add(new ButtonPutter(50,50,new DecorStoneWall(new Vector2(),true),gui));
+    		GScreen.Button_list.add(new ButtonPutter(150,50,new Entity(new Vector2(),false),gui));
+    		GScreen.Button_list.add(new ButtonPutter(250,50,new DecorStonePilon(new Vector2(),false),gui));//MB 12.03.2017 01:43:36
+    		GScreen.Button_list.add(new ButtonPutter(350,50,new DecorStoneWall2(new Vector2(),true),gui));
+    		GScreen.Button_list.add(new ButtonPutter(450,50,new DecorBuilding(new Vector2(),true),gui));
+    		GScreen.Button_list.add(new ButtonPutter(550,50,new DecorBuildingWall(new Vector2(),true),gui));
+    		
+    		GScreen.Button_list.add(new ButtonPutterTile(1000-70,700-40,12,gui));
+    		GScreen.Button_list.add(new ButtonPutterTile(1000-70,700-85,13,gui));
+    		
+    		//GScreen.Button_list.add(new ButtonPutter(150,50,new DecorPilon2(new Vector2(),false),gui));
+    		//GScreen.Button_list.add(new ButtonPutter(250,50,new DecorPilon3(new Vector2(),false),gui));
+    		//GScreen.Button_list.add(new ButtonPutter(250,50,new DecorTube(new Vector2(),true),gui));
+    		//GScreen.Button_list.add(new ButtonPutter(150,50,GScreen.Object_list.get(1)));
     		
     		GScreen.Button_list.add(new ButtonSaveMap(50,650));
-    		GScreen.Button_list.add(new ButtonLoadMap(150,650));
+    		GScreen.Button_list.add(new ButtonLoadMap(150,650,gui));
+    		
+    		GScreen.GUI_list.add(gui);
     	}
     	
     	if (key==Keys.O)
@@ -78,7 +111,10 @@ public class InputHandler implements InputProcessor {
     		
     		GScreen.show_skills_wheel=!GScreen.show_skills_wheel;
     		
+    		GUI gui=new GUISkillsWheel();
     		
+			GScreen.skills_camera.position.x=0;
+			GScreen.skills_camera.position.y=0;
     		
     		if (GScreen.show_skills_wheel)
     		{
@@ -88,8 +124,6 @@ public class InputHandler implements InputProcessor {
 
     			GScreen.skills_camera.update();
     			
-
-    			
     			Assets.skill_wheel.setTexture(new Texture(Gdx.files.internal("skills_wheel.png")));
     			Assets.skill_wheel.getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear); 
     			GScreen.main_control=false;
@@ -97,8 +131,10 @@ public class InputHandler implements InputProcessor {
     			for (int i=0; i<GScreen.pl.Skills_list.size(); i++)
     			{
     				Skill sk=GScreen.pl.Skills_list.get(i);
-    				GScreen.Button_list.add(new ButtonSkill(sk.pos.x,sk.pos.y,sk));
+    				gui.Button_list.add(new ButtonSkill(sk.pos.x,sk.pos.y,sk));
     			}
+    			
+    			GScreen.GUI_list.add(gui);
     			
     			
     		}
@@ -125,15 +161,18 @@ public class InputHandler implements InputProcessor {
     		
     		GScreen.show_equip=!GScreen.show_equip;
     		
+    		GUI gui=new GUIInventory();
+    		
     		if (GScreen.show_equip)
     		{
     			GScreen.show_skills_wheel=false;
     			
     			GScreen.main_control=false;
-    			GScreen.Button_list.add(new ButtonEqWeapon(150,250,-1));
-    			GScreen.Button_list.add(new ButtonEqWeapon(250,250,-2));
     			
-    			GScreen.Button_list.add(new ButtonEqWeapon(350,250,-5));
+    			gui.Button_list.add(new ButtonEqWeapon(150,250,-1));
+    			gui.Button_list.add(new ButtonEqWeapon(250,250,-2));
+    			
+    			gui.Button_list.add(new ButtonEqWeapon(350,250,-5));
     			
     			
     			//Assets.shoot00.
@@ -141,14 +180,17 @@ public class InputHandler implements InputProcessor {
     			for (int i=0; i<8; i++)
     			{
     				//if (GScreen.pl.inventory[i] instanceof Weapon)
-    				{GScreen.Button_list.add(new ButtonEqWeapon(150+i*85,200-j*45,i+j*8));}
+    				{gui.Button_list.add(new ButtonEqWeapon(150+i*85,200-j*45,i+j*8));}
     			}
     			
-    			GScreen.Button_list.add(new ButtonEqWeapon(200,250,99));
-    			GScreen.Button_list.add(new ButtonSkill(30,30,GScreen.pl.Skills_list.get(0)));
+    			gui.Button_list.add(new ButtonEqWeapon(200,250,99));
+    			gui.Button_list.add(new ButtonSkill(30,30,GScreen.pl.Skills_list.get(0)));
+    			
+    			GScreen.GUI_list.add(gui);
     		}
     		else
     		{
+    			//GScreen.GUI_list.remove(arg0)
     			GScreen.main_control=true;
     		}
     		

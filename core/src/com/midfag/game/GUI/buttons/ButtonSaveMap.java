@@ -1,4 +1,4 @@
-package com.midfag.game.GUI;
+package com.midfag.game.GUI.buttons;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -13,7 +13,8 @@ import com.midfag.game.Main;
 
 public class ButtonSaveMap extends Button {
 
-	
+	public int[][] tile_map;
+	public int[][] tile_map_overlay;
 	
 	public ButtonSaveMap(float _x, float _y)
 	{
@@ -30,6 +31,7 @@ public class ButtonSaveMap extends Button {
 		
 	}
 	
+	//@SuppressWarnings("static-access")
 	@Override
 	public void some_update(float _d)
 	{
@@ -75,6 +77,64 @@ public class ButtonSaveMap extends Button {
 			}
 			
 			file.writeString(s, false);
+			
+			tile_map=GScreen.tile_map;
+			tile_map_overlay=GScreen.tile_map_overlay;
+			
+			
+			
+			s="";
+			String ss="";
+		
+			file = Gdx.files.local("z_tile.txt");
+			for (int i=0; i<300; i++)
+			{
+				//System.out.println ("READY: "+i/3f+"% "+_d*1000);
+				ss="";
+				
+				for (int j=0; j<300; j++)
+				{
+					if (tile_map[j][i]<0) {ss+="nul";}
+					else
+					{
+						//if (tile_map[j][i]<100){ss+="0";}
+						if (tile_map[j][i]<10){ss+="0";}
+						ss+=tile_map[j][i];
+						
+						//ss+="|";
+					}
+				}
+				s+=ss;
+				
+				s+="\n";
+			}
+			file.writeString(s, false);
+			
+			s="";
+			file = Gdx.files.local("z_tile_overlay.txt");
+			for (int i=0; i<300; i++)
+			{
+				//System.out.println ("READY: "+i/3f+"% "+_d*1000);
+				ss="";
+				
+				for (int j=0; j<300; j++)
+				{
+					if (tile_map_overlay[j][i]<0) {ss+="no";}
+					else
+					{
+						//if (tile_map[j][i]<100){ss+="0";}
+						if (tile_map_overlay[j][i]<10){ss+="0";}
+						ss+=tile_map_overlay[j][i];
+						
+						//ss+="|";
+					}
+				}
+				s+=ss;
+				
+				s+="\n";
+			}
+			file.writeString(s, false);
+			
 		
 		}
 		
